@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
+import Header from './components/Header/Header';
+import Fridge from './components/Fridge/Fridge';
+import RecipeList from './components/RecipeList/RecipeList';
+import { getFoodData } from './api';
+
 function App() {
+  const [foods, setFoods] = useState({});
+  const [getFood, setGetFood] = useState('chicken_breast');
+
+  useEffect(() => {
+    getFoodData(getFood).then((data) => {
+      setFoods(data);
+    });
+  }, [getFood]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ backgroundColor: '#af5f25' }}>
+      <Header />
+      <Fridge setGetFood={setGetFood} getFood={getFood} />
+      <RecipeList foods={foods.meals} />
     </div>
   );
 }

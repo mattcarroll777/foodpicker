@@ -1,0 +1,11 @@
+#header {
+  margin: auto;
+  border: solid;
+  height: 5vh;
+  display: flex;
+}
+
+#gitLogo {
+  position: absolute;
+  right: 3vh;
+}
